@@ -29,17 +29,17 @@ class MarkovChain:
                 print(f'p{j + 1}({i + 1}) = {p:.4f}', end=' ')
             print('\n')
 
-    def calculate_last_state(self, num_tests: int = 5) -> np.array:
+    def calculate_state_after_iterations(self, num: int = 5) -> np.array:
         """
         Calculate the state vector after a specified number of iterations.
 
         Args:
-        - num_tests (int): The number of iterations.
+        - num (int): The number of iterations.
 
         Returns:
         - numpy.array: The resulting state vector.
         """
-        return np.dot(self.p_initial, np.linalg.matrix_power(self.P, num_tests))
+        return np.dot(self.p_initial, np.linalg.matrix_power(self.P, num))
 
 
 # Transition matrix and initial state
@@ -59,5 +59,5 @@ mc.run_tests()
 
 # Perform transition matrix power calculation and print result
 print('Перевірка p(5) = p(0) * P⁵:')
-for i, p in enumerate(mc.calculate_last_state()):
+for i, p in enumerate(mc.calculate_state_after_iterations()):
     print(f'p({i + 1}) = {p:.4f}', end=' ')
